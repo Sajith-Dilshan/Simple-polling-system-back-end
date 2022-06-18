@@ -11,7 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Poll {
+public class Poll implements SuperEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

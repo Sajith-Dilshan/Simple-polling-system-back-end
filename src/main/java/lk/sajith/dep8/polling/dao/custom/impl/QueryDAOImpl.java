@@ -1,4 +1,6 @@
 package lk.sajith.dep8.polling.dao.custom.impl;
 
-public class QueryDAOImpl {
+import lk.sajith.dep8.polling.dao.custom.QueryDAO;
+
+public class QueryDAOImpl implements QueryDAO {
 }

@@ -1,4 +1,6 @@
 package lk.sajith.dep8.polling.dao.custom;
 
-public interface QueryDAO {
+import lk.sajith.dep8.polling.dao.SuperDAO;
+
+public interface QueryDAO extends SuperDAO {
 }

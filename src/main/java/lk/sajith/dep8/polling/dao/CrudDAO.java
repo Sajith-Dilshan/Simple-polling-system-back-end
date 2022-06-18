@@ -1,4 +1,8 @@
 package lk.sajith.dep8.polling.dao;
 
-public interface CrudDAO {
+import lk.sajith.dep8.polling.entity.SuperEntity;
+
+import java.io.Serializable;
+
+public interface CrudDAO<T extends SuperEntity, ID extends Serializable> extends SuperDAO {
 }
