@@ -1,5 +1,9 @@
 package lk.sajith.dep8.polling.api;
 
+import jakarta.json.bind.Jsonb;
+import jakarta.json.bind.JsonbBuilder;
+import jakarta.json.bind.JsonbException;
+import lk.sajith.dep8.polling.dto.PollDTO;
 import lk.sajith.dep8.polling.util.HttpServlet2;
 import lk.sajith.dep8.polling.util.ResponseStatusException;
 
@@ -40,6 +44,28 @@ public class PollServlet extends HttpServlet2 {
                 .startsWith("application/json")){
             throw new ResponseStatusException(415, "Invalid content type");
         }
+
+        try{
+            /* Convert json -> PollDTO */
+            Jsonb jsonb = JsonbBuilder.create();
+            PollDTO pollDTO = jsonb.fromJson(req.getReader(), PollDTO.class);
+
+            /* Validate pollDTO */
+            if (pollDTO.getId() != null){
+                throw new ResponseStatusException(400, "Id should be empty");
+            }else if (pollDTO.getCreatedBy() == null || pollDTO.getCreatedBy().trim().isEmpty()){
+                throw new ResponseStatusException(400, "Invalid user");
+            }else if (pollDTO.getUpVotes() != 0 || pollDTO.getDownVotes() != 0){
+                throw new ResponseStatusException(400, "Votes count should be zero");
+            }else if (pollDTO.getTitle() == null || pollDTO.getTitle().trim().isEmpty()){
+                throw new ResponseStatusException(400, "Invalid title");
+            }
+
+            /* Todo: Request to save this pollDTO from service layer */
+        }catch (JsonbException t){
+            throw new ResponseStatusException(400, "Invalid JSON", t);
+        }
+
     }
 
     @Override
