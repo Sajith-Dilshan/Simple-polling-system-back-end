@@ -14,8 +14,8 @@ public class PollDTO implements Serializable {
     private Integer id;
     private String title;
     private String createdBy;
-    private int upVotes;
-    private int downVotes;
+    private Integer upVotes;
+    private Integer downVotes;
 
     public PollDTO(String title, String createdBy, int upVotes, int downVotes) {
         this.title = title;

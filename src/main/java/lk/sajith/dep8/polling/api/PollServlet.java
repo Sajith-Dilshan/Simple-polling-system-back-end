@@ -59,7 +59,8 @@ public class PollServlet extends HttpServlet2 {
                 throw new ResponseStatusException(400, "Id should be empty");
             }else if (pollDTO.getCreatedBy() == null || pollDTO.getCreatedBy().trim().isEmpty()){
                 throw new ResponseStatusException(400, "Invalid user");
-            }else if (pollDTO.getUpVotes() != 0 || pollDTO.getDownVotes() != 0){
+            }else if ((pollDTO.getUpVotes() != null && pollDTO.getUpVotes() != 0) ||
+                    (pollDTO.getDownVotes() != null && pollDTO.getDownVotes() != 0)) {
                 throw new ResponseStatusException(400, "Votes count should be zero");
             }else if (pollDTO.getTitle() == null || pollDTO.getTitle().trim().isEmpty()){
                 throw new ResponseStatusException(400, "Invalid title");
@@ -91,7 +92,9 @@ public class PollServlet extends HttpServlet2 {
                 throw new ResponseStatusException(400, "Id mismatched error");
             }else if (pollDTO.getCreatedBy() == null || pollDTO.getCreatedBy().trim().isEmpty()){
                 throw new ResponseStatusException(400, "Invalid user");
-            }else if (pollDTO.getUpVotes() < 0 || pollDTO.getDownVotes() < 0){
+            } else if (pollDTO.getUpVotes() == null || pollDTO.getDownVotes() == null) {
+                throw new ResponseStatusException(400, "Invalid votes count");
+            } else if (pollDTO.getUpVotes() < 0 || pollDTO.getDownVotes() < 0) {
                 throw new ResponseStatusException(400, "Votes count can't be negative");
             }else if (pollDTO.getTitle() == null || pollDTO.getTitle().trim().isEmpty()){
                 throw new ResponseStatusException(400, "Invalid title");
@@ -105,7 +108,7 @@ public class PollServlet extends HttpServlet2 {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("Delete");
+        int pollId = getPollId(req);
     }
 
 }
