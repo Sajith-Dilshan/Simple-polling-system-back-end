@@ -2,13 +2,19 @@ package lk.sajith.dep8.polling.service.custom.impl;
 
 import lk.sajith.dep8.polling.dto.PollDTO;
 import lk.sajith.dep8.polling.service.custom.PollService;
+import lk.sajith.dep8.polling.util.JPAUtil;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
 public class PollServiceImpl implements PollService {
+
     @Override
     public List<PollDTO> listAllPolls() {
-        return null;
+        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+
+
+        em.close();
     }
 
     @Override
@@ -30,4 +36,5 @@ public class PollServiceImpl implements PollService {
     public void deletePoll(int id) {
 
     }
+
 }
